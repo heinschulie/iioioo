@@ -102,15 +102,11 @@
     //     background-position: center;
     // }
 
-    section.active {
+    section.active h1 {background-clip: text;
+        -webkit-background-clip: text !important;
         background-image: url(https://c.tenor.com/5XoBLN7nL0wAAAAC/office-space-meme.gif);
         background-size: cover;
         background-position: center;
-    }
-
-    section.active h1 {
-        background-clip: text;
-        -webkit-background-clip: text !important;
     }
 
     h1 {
