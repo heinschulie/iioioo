@@ -49,7 +49,7 @@
 </style> -->
 
 
-<script context="module">
+<!-- <script context="module">
 	import { browser, dev } from '$app/env';
 	import { onMount } from 'svelte';
 	import * as THREE from "three"; 
@@ -62,8 +62,6 @@
 
 <script lang="ts">
 	
-	// import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.cjs'; 
-
 	function animate () {
 		requestAnimationFrame( animate ); 
 		
@@ -257,8 +255,7 @@
 		scene.add(moon);
 
 		animate(); 
-		// console.log("HELLO: ", document.querySelector("#bg")); 
-
+	
 	})
 
 </script>
@@ -270,84 +267,6 @@
 
 <div class="container">
 	<canvas id="bg"/>
-	<!-- <p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p>
-	<p>hello</p> -->
 </div>
 
 <style>
@@ -357,7 +276,6 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		/* z-index: -1; */
 	}
 
 	.container {
@@ -367,7 +285,6 @@
 	}
 
 	p {
-		/* z-index: 1; */
 		color: white;
 	}
-</style>
+</style> -->
