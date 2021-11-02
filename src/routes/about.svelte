@@ -8,11 +8,11 @@
 	// import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.cjs'; // NEED TO FIX THIS IN NETLIFY SOMEHOW. 
 	// 
 
-	import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-	import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'; 
+	import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+	import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js'; 
 
 	export const prerender = false;
-	
+
 </script>
 
 <script lang="ts">
