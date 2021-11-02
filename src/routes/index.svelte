@@ -8,37 +8,55 @@
 	const colormap1 = { 1: [0] };
 	const colormap2 = { 1: [1,2] };
 	const colormap3 = { 1: [2,3,4] };
+
+	const frontendGif = "https://c.tenor.com/7Cpec6v3Xc4AAAAd/office-space-bill.gif";
+	const backendGif = "https://c.tenor.com/9maoyIgZGNQAAAAd/office-space.gif";
+	const weekendGif = "https://c.tenor.com/WyX5TT9_b6sAAAAC/officespace-walking.gif";
+
+	$: currentGif = null; 
+	const handleChangGif = (evt: any) => {
+		console.log("handling gif: ", evt);
+		currentGif = evt.detail.gif
+	}
+
 </script>
 
 <svelte:head>
 	<title>Home</title>
 </svelte:head>
 
-<section class="panel headline">
+<section class="panel headline" style="background-image: url({currentGif})">
 	<Rufflbox 
 		firstString = "oiiiooiioi"
 		secondString = "frontend"
-		gif = "https://c.tenor.com/7Cpec6v3Xc4AAAAd/office-space-bill.gif"
+		gif={frontendGif}
+		faded={!!currentGif && currentGif != frontendGif}
 		colormap={colormap1} 
 		link="/about"
+		on:setGif={ handleChangGif }
 	/>
 
 	<Rufflbox 
 		firstString = "ioioioioii"
 		secondString = "backend"
-		gif = "https://c.tenor.com/9maoyIgZGNQAAAAd/office-space.gif"
+		gif={backendGif}
+		faded={!!currentGif && currentGif != backendGif}
 		colormap={colormap1} 
+		on:setGif={ handleChangGif }
 	/>
 
 	<Rufflbox 
 		firstString = "iioiooiooi"
 		secondString = "weekend"
-		gif = "https://c.tenor.com/WyX5TT9_b6sAAAAC/officespace-walking.gif"
+		gif={weekendGif}
+		faded={!!currentGif && currentGif != weekendGif}
 		colormap={colormap1} 
+		on:setGif={ handleChangGif }
 	/>
 </section>
 
-<section class="">
+<section class="intro">
+
 	<!-- https://c.tenor.com/3fnYUGe0Jh4AAAAd/what-would-you-say-you-do-here-office-space.gif -->
 	
 	<!-- <div class="title-box">
@@ -86,17 +104,24 @@
 		margin: 0 auto;
 		box-sizing: border-box;
 
+		background-size: cover;
+		background-position: center center;
+
 	}
 
 	section.panel {
 		grid-template-columns: repeat(3, 1fr);
 	}
 
+	section.intro {
+		padding: 15px;
+	}
+
 	.copy{
 		padding: 0;
 		margin: 0;
 		font-size: 1rem;
-    	text-align: center;
+    	// text-align: center;
 
 		span {
 			font-size: 1rem;

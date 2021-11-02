@@ -1,5 +1,7 @@
 
 <script lang="ts">
+    import { createEventDispatcher } from 'svelte';
+    const dispatch = createEventDispatcher();
 
     import Ruffl from './Ruffl.svelte'; 
 
@@ -11,6 +13,7 @@
     export let colormap = {}; 
     export let currentColorIndex = 1; 
     export let active = false; 
+    export let faded = false;
     export let gif = '';
     export let gifWidth = 1; 
 
@@ -21,12 +24,14 @@
     const onEnter = () => {
         targetArray = secondString.split("");
         active = true; 
+        dispatch('setGif', { gif });
     }
 
     const onLeave = () => {
         targetArray = firstString.split("");
         active = false; 
         showGif = false;
+        dispatch('setGif', { gif: null });
     }
 
     function handleMessage(event) {
@@ -37,7 +42,8 @@
 </script>
 
 <a href={link}>
-    <section class:active on:mouseenter={onEnter} on:mouseleave={onLeave}>
+
+    <section class:active class:faded on:mouseenter={onEnter} on:mouseleave={onLeave}>
         
             {#each targetArray as targetLetter, currentIdx}
             <!-- <span style="background-color: {backgroundColor};" class="block" > -->
@@ -53,9 +59,9 @@
                 <div class="dot"></div>
             {/each} -->
 
-            {#if active}
+            <!-- {#if active}
                 <img src={gif} alt="Office space gif" />
-            {/if}
+            {/if} -->
         
     </section>
 </a>
@@ -104,7 +110,8 @@
 
     section.active h1 {background-clip: text;
         -webkit-background-clip: text !important;
-        background-image: url(https://c.tenor.com/5XoBLN7nL0wAAAAC/office-space-meme.gif);
+        // background-image: url(https://c.tenor.com/5XoBLN7nL0wAAAAC/office-space-meme.gif);
+        background-image: url(https://gifimage.net/wp-content/uploads/2017/06/psychedelic-gif-5.gif);
         background-size: cover;
         background-position: center;
     }
@@ -120,6 +127,9 @@
 
     .active h1 {
         color: transparent; 
+    }
+    .faded {
+        opacity: 0.6;
     }
     
     .dot {
