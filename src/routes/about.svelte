@@ -1,14 +1,18 @@
 
 
-<!-- <script context="module">
+<script context="module">
 	import { browser, dev } from '$app/env';
 	import { onMount } from 'svelte';
 	import * as THREE from "three"; 
 	
-	import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.cjs'; // NEED TO FIX THIS IN NETLIFY SOMEHOW. 
-	import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.cjs'; 
-	
+	// import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.cjs'; // NEED TO FIX THIS IN NETLIFY SOMEHOW. 
+	// 
+
+	import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+	import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'; 
+
 	export const prerender = false;
+	
 </script>
 
 <script lang="ts">
@@ -238,13 +242,15 @@
 	p {
 		color: white;
 	}
-</style> -->
+</style>
 
 
-<script lang="ts">
+<!-- <script lang="ts">
 import { onMount } from "svelte";
 
 	let inputElement = document.getElementById("input");
+
+	$: data = []; 
 
 	function handleFiles(evt) {
 		
@@ -259,19 +265,38 @@ import { onMount } from "svelte";
 				// console.log("CONTENTS: ", contents);
                 let lines = contents.split('==========').map( line => line.split("\r\n").filter(v => !!v) );
                 // console.log("LINES: ", lines); 
-				const objs = lines.reduce((acc, curr) => {
+				const notes = lines.reduce((acc, curr, idx) => {
 					// console.log("CURR: ", curr); 
 					if(!curr.length) {
 						return acc; 
 					}
+					const id = idx;
 					const author = curr[0].match(/\((.*?)\)/)[1];
 					const title = curr[0].split(`(${author})`)[0].trim();
 					const type = curr[1].includes("Note") ? "note" : "highlight"; 
+					const date = new Date(curr[1].split("Added on ")[1]); 
+					const parentId = type === "note" ? (idx + 1) : null; 
 					const content = curr[2]; 
-					return [ ...acc, { title, author, type, content } ]; 
-				}, []);
+					return [ ...acc, { id, parentId, date, title, author, type, content } ]; 
+				}, [] as { id: string, parentId: string, date: Date, title: string, author: string, type: string, content: string }[] );
                 //////
-                console.log("OBJS: ", objs); 
+                // console.log("OBJS: ", notes); 
+
+				const authorsAndBooks = notes.reduce((acc, note) => {
+					return { 
+						books: { ...acc.books, [ note.title ]: note.author }, 
+						authors: { ...acc.books, [ note.author ]: true }
+					}
+				}, { books: {}, authors: {} }); 
+
+				data = [ 
+					...notes, 
+					Object.keys(authorsAndBooks.books).map(bookTitle => ({ id: bookTitle, parentId: authorsAndBooks.books[ bookTitle ] })),
+					Object.values(authorsAndBooks.books).map(author => ({ id: author }))
+				]
+
+				console.log("data: ", data); 
+
             }
         })(reader);
 
@@ -286,3 +311,14 @@ import { onMount } from "svelte";
 </script>
 
 <input type="file" id="input" on:change={(evt) => handleFiles(evt)} multiple>
+
+{#each data as d}
+
+	<div class="card">
+		<p>author: {d.author} </p>
+		<p>title: {d.title} </p>
+		<p>date: {d.date.toString()} </p>
+		<p>content: {d.content} </p>
+	</div>
+
+{/each} -->
